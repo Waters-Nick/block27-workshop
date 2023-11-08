@@ -40,3 +40,12 @@
 .read-the-docs {
   color: #888;
 }
+
+.signUpForm {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  margin: 0 0 1rem 1rem;
+}
