@@ -8,13 +8,33 @@ function SignUpFrom() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    console.log('Eligible function')
+
+    try {
+      const response = await fetch("https://fsa-jwt-practice.herokuapp.com/signup",
+        {
+          method: "POST",
+          header: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            username: "some-username",
+            password: "secrets-are-no-fun-2"
+          })
+        });
+      const result = await response.json();
+      console.log(result);
+
+    } catch (err) {
+      setError(error.message);
+    }
   }
 
 
   return (
     <>
       <h2>Sign Up</h2>
+      {error && <p>{error}</p>}
+
       <form className="signUpForm" onSubmit={handleSubmit}>
         <label>Username: 
           <input type="text" value={username} onChange={event => setUsername(event.target.value)} />
@@ -24,6 +44,7 @@ function SignUpFrom() {
         </label>
         <button>Submit</button>
       </form>
+
     </>
   )
 }
